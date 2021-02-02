@@ -75,7 +75,7 @@ namespace WinformProject
 
             //-----------------------------------------------------------------------------------------
 
-            /*var httpClient = new HttpClient
+            var httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://api.github.com/graphql")
             };
@@ -83,7 +83,7 @@ namespace WinformProject
             httpClient.DefaultRequestHeaders.Add("User-Agent", "WinForms");
             httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.github.audit-log-preview+json");
 
-            string basicValue = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{emailTbox.Text}:3a2566bf853e0a1100b3c831ae17b95879ee245b"));
+            string basicValue = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{emailTbox.Text}:98690baeba12bc1d2df89c7b209cca20408e7c9a"));
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basicValue);
 
             var queryObject = new
@@ -91,7 +91,7 @@ namespace WinformProject
                 query = @"query { 
                 viewer{
                     login
-                    
+                    updatedAt
                 }
             }",
 
@@ -116,29 +116,29 @@ namespace WinformProject
 
                 logRcrdsTbox.Text = responseObj.ToString();
             }
-*/
+
             //-----------------------------------------------------------------------------------------
 
 
 
-            /*var username = Encoding.Default.GetBytes("oneeye03");
-            var password = Encoding.Default.GetBytes("0Neye13");
+            /*var username = Encoding.Default.GetBytes(emailTbox.Text);
+            var password = Encoding.Default.GetBytes(passTbox.Text);
             var baseAddress = new Uri("https://github.com/login");
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = baseAddress })
             {
-                string basicValue = Convert.ToBase64String(Encoding.UTF8.GetBytes($"oneeye03:0Neye13"));
+                string basicValue = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{emailTbox.Text}:{passTbox.Text}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("User-Agent", basicValue);
 
                 var homePageResult = client.GetAsync("/");
                 homePageResult.Result.EnsureSuccessStatusCode();
 
                 *//*var formData = new List<KeyValuePair<string, string>>();
-                formData.Add(new KeyValuePair<string, string>("login", "oneeye03"));
-                formData.Add(new KeyValuePair<string, string>("password", "0Neye13"));
+                formData.Add(new KeyValuePair<string, string>("login", emailTbox.Text));
+                formData.Add(new KeyValuePair<string, string>("password", passTbox.Text));
 
-                var requestContent = string.Format("login={0}&password={1}", "oneeye03", "0Neye13");
+                var requestContent = string.Format("login={0}&password={1}", emailTbox.Text, passTbox.Text);
                 var content = new StringContent(HttpUtility.UrlEncode(requestContent), Encoding.UTF8, "application/vnd.github.v3+json");*//*
 
                 var content = new FormUrlEncodedContent(new[]
@@ -155,7 +155,7 @@ namespace WinformProject
 
             }*/
 
-            CookieContainer cookieJar = new CookieContainer();
+            /*CookieContainer cookieJar = new CookieContainer();
             HttpClientHandler handler = new HttpClientHandler()
             {
                 CookieContainer = cookieJar
@@ -173,8 +173,8 @@ namespace WinformProject
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("User-Agent", Convert.ToBase64String(byteArray));
 
             var formData = new List<KeyValuePair<string, string>>();
-            formData.Add(new KeyValuePair<string, string>("login", "oneeye03"));
-            formData.Add(new KeyValuePair<string, string>("password", "0Neye13"));
+            formData.Add(new KeyValuePair<string, string>("login", emailTbox.Text));
+            formData.Add(new KeyValuePair<string, string>("password", passTbox.Text));
 
             request.Content = new FormUrlEncodedContent(formData);
             var response = await client.PostAsync("http://github.com/login", request.Content);
@@ -185,23 +185,23 @@ namespace WinformProject
                 var read = await client.GetAsync("http://github.com/settings/security-log");
                 logRcrdsTbox.Text = await read.Content.ReadAsStringAsync();
 
-                /*var formLogsData = new List<KeyValuePair<string, string>>();
+                *//*var formLogsData = new List<KeyValuePair<string, string>>();
                 formLogsData.Add(new KeyValuePair<string, string>("authenticity_token", "NN66sWcb5TFPEmvOtOc49o4q2C5XNe9FbmZ8+VmHPrSx9BumqxjqvBEwi57+rOOcUgHV/KpQolz7iPiSECBJLQ=="));
 
                 request.Content = new FormUrlEncodedContent(formData);
                 var responseLogs = await client.PostAsync("/settings/security-log/export.json", request.Content);
 
 
-                logRcrdsTbox.Text = responseLogs.ToString();*/
+                logRcrdsTbox.Text = responseLogs.ToString();*//*
             }
-
+*/
 
 
 
             /*const string uri = "https://github.com/settings/security-log";
             using (var client = new HttpClient())
             {
-                var byteArray = Encoding.ASCII.GetBytes("oneeye03:0Neye13");
+                var byteArray = Encoding.ASCII.GetBytes("{emailTbox.Text}:{passTbox.Text}");
                 var header = new AuthenticationHeaderValue(
                            "Basic", Convert.ToBase64String(byteArray));
                 client.DefaultRequestHeaders.Authorization = header;
@@ -237,8 +237,8 @@ namespace WinformProject
 
             HttpContent content = new FormUrlEncodedContent(new[]
                 {
-        new KeyValuePair<string, string>("login", "oneeye03"),
-        new KeyValuePair<string, string>("password", "0Neye13"),
+        new KeyValuePair<string, string>("login", emailTbox.Text),
+        new KeyValuePair<string, string>("password", passTbox.Text),
     });
 
             response = await client.PostAsync("/session", content);
@@ -270,7 +270,7 @@ namespace WinformProject
             // ... Use HttpClient.            
             HttpClient client = new HttpClient(handler);
 
-            var byteArray = Encoding.ASCII.GetBytes("oneeye03:0Neye13");
+            var byteArray = Encoding.ASCII.GetBytes($"{emailTbox.Text}:{passTbox.Text}");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("User-Agent", Convert.ToBase64String(byteArray));
 
             HttpResponseMessage response = await client.GetAsync(TARGETURL);
